@@ -39,7 +39,7 @@ pip install mmcv-full -f [https://download.openmmlab.com/mmcv/dist/cu116/torch1.
 1. **Feature Engineering**: SynTME operates on normalized multi-omics data configurations and extracted molecular substructure encodings. The required tensor arrays should be located in `data/0_cell_data/` and `data/1_drug_data/`. 
    
    > **Important Notice regarding Data Access**: 
-   > Due to GitHub's storage constraints for large binary files, the pre-processed `.npy` arrays are hosted externally. Please acquire the necessary datasets from [Insert Your Zenodo/Drive Link Here] and populate the `data/` directory accordingly.
+   > Due to GitHub's storage constraints for large binary files, the pre-processed `.npy` arrays are hosted externally. Please acquire the necessary datasets from [ https://pan.baidu.com/s/1BnnmXrH14FFFU7DEmJXzDw 提取码: h2ap] and populate the `data/` directory accordingly.
 
 2. **Combination Registry**: The primary execution targets are stored within `data/split/all_items.npy`. The required dimensionality for each entry is `[Mol_A_SMILES, Mol_B_SMILES, Context_ID, Synergy_Score]`. For inference tasks on unlabelled pairs, initialize the target score to `0.0`.
 3. Ensure that all static paths within `utils.py` correctly point to your local data storage prior to execution.
