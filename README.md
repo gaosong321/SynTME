@@ -2,8 +2,8 @@
 
 ## 📌 Introduction
 Combination therapy mitigates toxicity and resistance, yet experimental screening
-remains costly and inefficient. Although machine learning has advanced drug synergy prediction, most existing models are trained on in vitro monolayer cell-line data that omit tumor microenvironment information, limiting clinical
-relevance. Furthermore, these methods typically rely on static feature fusion, failing to explicitly model the stagewise pharmacological dependencies governing drug action in vivo. We aim to address these limitations by proposing
+remains costly and inefficient. Although machine learning has advanced drug synergy prediction, most existing models are trained on in vitro monolayer cell-line data that omit tumor microenvironment information, limiting clinical
+relevance. Furthermore, these methods typically rely on static feature fusion, failing to explicitly model the stage-wise pharmacological dependencies governing drug action in vivo. We aim to address these limitations by proposing
 SynTME, a TME-aware and pharmacology-inspired framework in which the TME is operationalized through immune
 infiltration–based descriptors.
 
