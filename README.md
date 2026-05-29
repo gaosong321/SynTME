@@ -3,7 +3,7 @@
 ## 📌 Introduction
 Combination therapy mitigates toxicity and resistance, yet experimental screening
 remains costly and inefficient. Although machine learning has advanced drug synergy prediction, most existing models are trained on in vitro monolayer cell-line data that omit tumor microenvironment information, limiting clinical
-relevance. Furthermore, these methods typically rely on static feature fusion, failing to explicitly model the stage-wise pharmacological dependencies governing drug action in vivo. We aim to address these limitations by proposing
+relevance. Furthermore, these methods typically rely on static feature fusion and do not organize drug response in a stage-wise manner that reflects pharmacodynamically motivated aspects of synergy formation within a single treatment context. We aim to address these limitations by proposing
 SynTME, a TME-aware and pharmacology-inspired framework in which the TME is operationalized through immune
 infiltration–based descriptors.
 
@@ -17,7 +17,10 @@ The SynTME repository is structured to facilitate reproducibility and future ext
 * `metrics.py`: Statistical evaluation metrics computation.
 * `main.py`: The primary execution protocol for the SynTME framework.
 
-## ⚙️ Environment Configuration
+## 📦 Dataset and Software Information
+
+The primary benchmark dataset used in this study is DrugComb v1.5. Additional benchmark datasets include the O'Neil oncology combination screen, Oncology Screen/NCI ALMANAC, and DrugCombDB. Cell-line molecular features were derived from DepMap genomic profiles. Drug chemical information and SMILES annotations were obtained from ChEMBL. Immune infiltration descriptors were constructed from TCGA immune infiltration resources together with UCSC Xena phenotype annotations.
+
 The SynTME framework relies on PyTorch and PyTorch Geometric for dynamic graph and tensor operations. We recommend isolating the environment using Conda.
 
 Execute the following commands to establish the required dependencies:
@@ -27,12 +30,21 @@ conda create -n syntme_env python=3.8 pip
 conda activate syntme_env
 
 # Install PyTorch and core dependencies (adjust CUDA version as dictated by your hardware)
-pip install torch torchvision torchaudio --index-url [https://download.pytorch.org/whl/cu116](https://download.pytorch.org/whl/cu116)
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu116
 pip install torch-geometric
 pip install pandas tqdm scikit-learn rdkit
-pip install mmcv-full -f [https://download.openmmlab.com/mmcv/dist/cu116/torch1.12.0/index.html](https://download.openmmlab.com/mmcv/dist/cu116/torch1.12.0/index.html)
-
+pip install mmcv-full -f https://download.openmmlab.com/mmcv/dist/cu116/torch1.12.0/index.html
 ```
+
+## 🔁 Reproducibility Settings
+
+The reported sample-level train/validation/test partitions were generated using split seed `42`. The reported cancer-type-constrained TME allocation was generated using sampling seed `42`.
+
+Model-training variability was evaluated over five independent runs with training seeds `2025`, `36`, `2002`, `42`, and `3660`. The corresponding performance metrics are reported as mean ± standard deviation where applicable.
+
+The same data splits and TME sampling protocol were used across compared models unless otherwise specified.
+
+
 ## 🧬 Implementation Details
 
 ### Data Manifold Preparation
@@ -43,7 +55,24 @@ pip install mmcv-full -f [https://download.openmmlab.com/mmcv/dist/cu116/torch1.
 
 2. **Combination Registry**: The primary execution targets are stored within `data/split/all_items.npy`. The required dimensionality for each entry is `[Mol_A_SMILES, Mol_B_SMILES, Context_ID, Synergy_Score]`. For inference tasks on unlabelled pairs, initialize the target score to `0.0`.
 3. Ensure that all static paths within `utils.py` correctly point to your local data storage prior to execution.
-
+After downloading the external data package, the `data/` directory should follow the structure below（The `split/` directory contains the sample-level train/validation/test partitions used for the reported experiments, while `independent_dataset/` contains the processed inputs for the additional benchmark datasets.）:
+data/
+├── 0_cell_data/
+│   ├── 4079g/
+│   └── cellTme.npy
+├── 1_drug_data/
+│   └── drugSmile_drugSubEmbed_2644.npy
+├── independent_dataset/
+│   ├── indep0-oneil/
+│   ├── indep1-OncologyScreen/
+│   └── indep2-DrugCombDB/
+├── raw_data/
+│   ├── cell_info.csv
+│   ├── drug_info.csv
+│   ├── gene_4079.csv
+│   └── drug_substructure/
+├── processed/
+└── split/
 ### Phase 1: Framework Optimization (Training)
 To initialize the training protocol and optimize the SynTME framework, execute the standard training command. Logs will be automatically generated and timestamped in the `./experiment` directory.
 
