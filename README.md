@@ -56,6 +56,7 @@ The same data splits and TME sampling protocol were used across compared models 
 2. **Combination Registry**: The primary execution targets are stored within `data/split/all_items.npy`. The required dimensionality for each entry is `[Mol_A_SMILES, Mol_B_SMILES, Context_ID, Synergy_Score]`. For inference tasks on unlabelled pairs, initialize the target score to `0.0`.
 3. Ensure that all static paths within `utils.py` correctly point to your local data storage prior to execution.
 After downloading the external data package, the `data/` directory should follow the structure below（The `split/` directory contains the sample-level train/validation/test partitions used for the reported experiments, while `independent_dataset/` contains the processed inputs for the additional benchmark datasets.）:
+```text
 data/
 ├── 0_cell_data/
 │   ├── 4079g/
@@ -73,6 +74,7 @@ data/
 │   └── drug_substructure/
 ├── processed/
 └── split/
+```
 ### Phase 1: Framework Optimization (Training)
 To initialize the training protocol and optimize the SynTME framework, execute the standard training command. Logs will be automatically generated and timestamped in the `./experiment` directory.
 
