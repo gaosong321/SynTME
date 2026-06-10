@@ -13,7 +13,7 @@ The SynTME repository is structured to facilitate reproducibility and future ext
 * `dataset/`: Core scripts for topological dataset construction (`syntme_dataset.py`).
 * `models/`: Architectural components of the SynTME framework (`syntme_core.py`, `head.py`, `model_utlis.py`).
 * `experiment/`: Directory for automated logging, model checkpoints, and inference outputs.
-* `utils.py`: Subroutines for data stream loading, metrics calculation, and process flow control.
+* `utlis.py`: Subroutines for data stream loading, metrics calculation, and process flow control.
 * `metrics.py`: Statistical evaluation metrics computation.
 * `main.py`: The primary execution protocol for the SynTME framework.
 
