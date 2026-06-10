@@ -30,10 +30,10 @@ conda create -n syntme_env python=3.8 pip
 conda activate syntme_env
 
 # Install PyTorch and core dependencies (adjust CUDA version as dictated by your hardware)
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu116
+pip install torch torchvision torchaudio 
 pip install torch-geometric
 pip install pandas tqdm scikit-learn rdkit
-pip install mmcv-full -f https://download.openmmlab.com/mmcv/dist/cu116/torch1.12.0/index.html
+pip install mmcv-full 
 ```
 
 ## 🔁 Reproducibility Settings
